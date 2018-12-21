@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Recipe } from '../recipe.model'; 
 
@@ -16,6 +16,9 @@ export class RecipeListComponent implements OnInit {
     new Recipe('Fajitas', 'Old El Paso Fajitas','https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Fcdn-image.myrecipes.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2F6045301_dtlet8152.jpg%3Fitok%3Dp8e70RY3&w=1000&c=sc&poi=face&q=70')
 
   ]
+
+
+  @Input() inputRecipe: string
     // using the 'new' keyword is calling the contructor which is defined in the model file, so have to pass it the constructor params.
  
 
