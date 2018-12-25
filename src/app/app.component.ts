@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  recipeStatus: boolean = true
-  shoppingStatus: boolean = true;
+  recipeStatus: boolean = true;
+  shoppingStatus: boolean = false;
 
   incomingRecipe(recipeResult){
     this.recipeStatus = recipeResult;
