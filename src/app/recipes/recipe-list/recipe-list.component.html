@@ -13,6 +13,14 @@
         <app-recipe-item
         *ngFor = "let recipe of recipes"
         [inputRecipe] = "recipe"
+        (click) = "recipeClick(recipe)">
+<!-- 
+        input recipe is so that we can bind to each element of the array in reciep-list
+         -->
+         <!-- (recpieItem) is for sending the indiviual recipe up -->
+
+
+
         ></app-recipe-item>
     </div>
 </div>

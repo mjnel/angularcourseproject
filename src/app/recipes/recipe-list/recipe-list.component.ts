@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../recipe.model'; 
+// import { EventEmitter } from 'events';
 
 
 @Component({
@@ -18,12 +18,17 @@ export class RecipeListComponent implements OnInit {
   ]
 
 
-  @Input() inputRecipe: string
+  @Input() selectedRecipe: string
+  @Output () outputReceipe = new EventEmitter<string>();
+  // @Output() recpieItem = new EventEmitter<void>();
+
     // using the 'new' keyword is calling the contructor which is defined in the model file, so have to pass it the constructor params.
  
-
+    recipeClick(input){
+      this.outputReceipe.emit(input);      
+    }
  
-
+    // pass the input 
   constructor() { }
 
   ngOnInit() {
