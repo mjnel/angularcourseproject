@@ -1,24 +1,19 @@
-
-<app-header
-(recipeSend) = "incomingRecipe($event)" 
-(shoppingSend)  = "incomingShopping($event)"
-
-></app-header>
+<app-header (recipeSend)="incomingRecipe($event)" (shoppingSend)="incomingShopping($event)"></app-header>
 
 <div class="container">
   <div class="row">
-<div class="col-md-12">
+    <div class="col-md-12">
 
-  <app-recipes *ngIf = "recipeStatus"></app-recipes>
-  <app-shopping-list *ngIf = "shoppingStatus"></app-shopping-list>
+      <app-recipes *ngIf="recipeStatus"></app-recipes>
+      <app-shopping-list *ngIf="shoppingStatus"></app-shopping-list>
 
-<!-- 
+      <!-- 
 determine which link was clickdd in the heading so that we can display either or recipies or SL -->
 
 
-<!-- Shift + ALT + F  = formatting -->
+      <!-- Shift + ALT + F  = formatting -->
 
-</div>
+    </div>
 
 
   </div>
