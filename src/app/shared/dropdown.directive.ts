@@ -1,20 +1,19 @@
-import { Directive, HostListener } from '@angular/core';
+import { Directive, HostListener, HostBinding } from '@angular/core';
 
 @Directive({
   selector: '[appDropdown]'
 })
 export class DropdownDirective {
 
+  @HostBinding('class.open') condition = false;
 
-  @HostListener('mouseenter') mouseOver(eventData: Event) {
-    this.backgroundColor = this.highlightColor;
-    // this.renderer.setStyle(this.elref.nativeElement, 'background-color', 'blue');
+
+  @HostListener('click') onChange() {
+    this.condition = !this.condition;  
   }
 
 
-  @HostListener('click')click(eventData:Event){
-    
-  }
+
 
 
 
