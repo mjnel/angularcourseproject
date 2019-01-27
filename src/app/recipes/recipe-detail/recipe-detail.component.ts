@@ -12,10 +12,13 @@ export class RecipeDetailComponent implements OnInit, OnChanges {
 
   @Input() incomingRecipe:Recipe
 
-  
+  toShoppingList(input){
+    console.log(input)
+  }  
   constructor() { }
 
   ngOnInit() {
+    console.log(`the incoming Recipe Item is ${this.incomingRecipe.Ingreidents[0]}`)
 
   }
 
