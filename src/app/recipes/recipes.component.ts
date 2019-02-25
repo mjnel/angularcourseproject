@@ -10,7 +10,6 @@ import {RecipeService} from './recipe.service';
 })
 export class RecipesComponent implements OnInit {
 
-// do I make the model here?
 
 receivedRecipe: Recipe;
 

@@ -22,5 +22,13 @@ export class ShoppingListService{
         
     }
 
+    addIngreidents(Ingreidents: Ingreident[]){
+
+        this.ingreidents.push(...Ingreidents);
+        this.IngreidentChanged.emit(this.ingreidents.slice());
+
+
+    }
+
 
 }
