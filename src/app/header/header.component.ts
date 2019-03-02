@@ -8,24 +8,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
 
-@Output() recipeSend = new EventEmitter<boolean>();
-@Output() shoppingSend = new EventEmitter<boolean>();
 
 
-  recipeCall(){
-    this.recipeSend.emit(true)
-    this.shoppingSend.emit(false)
-  
-  }
-  
 
-  shoppingCall(){
-    this.shoppingSend.emit(true);
-    this.recipeSend.emit(false);
-
-  }
-
-  constructor() { }
 
   ngOnInit() {
   }
