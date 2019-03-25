@@ -1,7 +1,10 @@
 <a 
 style ="cursor: pointer;"
 class="list-group-item clearfix"
-(click) = "recipeItemFunction()"
+[routerLink] ="[index]"
+routerLinkActive ="active"
+
+
 >
     <div class="pull-left">
         <h4><div class="list-group-item-heading">{{inputRecipe.name}}</div></h4>
@@ -15,4 +18,11 @@ class="list-group-item clearfix"
         class="img-responsive" 
         style="max-height: 50px;">
         </span>
+
+
 </a>
+
+<!-- [routerLink]="['/users', user.id, user.name]" -->
+
+
+<!-- (click) = "recipeItemFunction()" -->

@@ -15,7 +15,7 @@ export class RecipeService{
 
 
   private recipes:Recipe[] =[
-        new Recipe('Spaghetti Bolognese', 'The best Bolognese there is',
+        new Recipe( 'Spaghetti Bolognese', 'The best Bolognese there is',
          'http://cdn.recipes100.com/v/e62c7678de0a99ce4b0bca094f87ba50.jpg',
          [new Ingreident ('Meat', 1), new Ingreident("Veg", 5)]),
 
@@ -36,5 +36,15 @@ addIngreidentsToShoppingList(Ingreidents: Ingreident[]){
 
 
 
+
+
+
+
+
+
+
+getRecipefromArr(index){
+  return this.recipes[index]
+}
 
 }

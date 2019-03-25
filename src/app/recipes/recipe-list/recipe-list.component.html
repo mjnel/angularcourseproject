@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-        <button class="btn-success">New Recipe</button>
+        <button class="btn-success" (click)="onNewReipe()">  New Recipe </button>
     </div>
 </div>
 
@@ -11,10 +11,10 @@
     <div class="col-xs-12">
 
         <app-recipe-item
-        *ngFor = "let recipe of recipes"
+        *ngFor = "let recipe of recipes; let i = index"
         [inputRecipe] = "recipe"
-        >
-<!-- 
+        [index] = "i">
+<!--    
         input recipe is so that we can bind to each element of the array in reciep-list
          -->
          <!-- (recpieItem) is for sending the indiviual recipe up -->

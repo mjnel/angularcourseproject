@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit   } from '@angular/core';
 import {Recipe} from './recipe.model';
 import {RecipeService} from './recipe.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
@@ -15,13 +16,9 @@ receivedRecipe: Recipe;
 
 
 
-incomingRecipe  (input){
-  this.receivedRecipe = input;
-      console.log(`coming from the recipe component: ${input.name}`)
-  }
-  
-
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService,
+              private router: Router
+  ) {}
 
   ngOnInit() {
     this.recipeService.recipeSelected.subscribe(
@@ -31,4 +28,8 @@ incomingRecipe  (input){
     )
   }
 
+
+
 }
+
+// <!-- [routerLink]="['/users', user.id, user.name]" -->
