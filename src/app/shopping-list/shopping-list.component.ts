@@ -42,7 +42,10 @@ ngOnDestroy(){
 
 
 
+  onEditItem(index:number){
+    this.shoppingListService.startedEditing.next(index)
 
+  }
 
 
 

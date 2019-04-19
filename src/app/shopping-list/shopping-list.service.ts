@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 export class ShoppingListService{
     // mamnaghe list of ingedietns + add ingreditent method currently in shopping list c
     IngreidentChanged = new Subject <Ingreident[]>()
+    startedEditing = new Subject <number>()
     
    private ingreidents: Ingreident[] = [
         new Ingreident('Apples', 5),
@@ -20,6 +21,10 @@ export class ShoppingListService{
     getIngridents (){
         return this.ingreidents.slice();
         
+    }
+
+    getIngreident(index: number){
+        return this.ingreidents[index];
     }
 
     addIngreidents(Ingreidents: Ingreident[]){
