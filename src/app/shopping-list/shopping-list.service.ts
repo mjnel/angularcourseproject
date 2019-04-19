@@ -31,6 +31,13 @@ export class ShoppingListService{
 
         this.ingreidents.push(...Ingreidents);
         this.IngreidentChanged.next(this.ingreidents.slice());
+    }
+
+
+    editIngreident(index: number, changedIngreident: Ingreident){   
+        console.log(`got here`)
+        this.ingreidents.splice(index, 1, changedIngreident)
+        this.IngreidentChanged.next(this.ingreidents.slice());
 
 
     }

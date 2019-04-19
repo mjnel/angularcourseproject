@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Ingreident } from 'src/app/shared/ingredient.model';
 import {ShoppingListService} from './../shopping-list.service';
-import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -35,6 +35,31 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.subscription.unsubscribe()
   }
+
+
+  onEdit(form: NgForm){
+    const value = form.value;
+    // console.log(value, this.editItemIndex)
+    const newIngredient = new Ingreident(value.name, value.amount)
+    console.log(newIngredient)
+    this.slService.editIngreident(this.editItemIndex, newIngredient)
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   onAddItem(form: NgForm){
