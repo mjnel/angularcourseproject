@@ -28,11 +28,19 @@ export class ShoppingListService{
     }
 
     addIngreidents(Ingreidents: Ingreident[]){
-
         this.ingreidents.push(...Ingreidents);
         this.IngreidentChanged.next(this.ingreidents.slice());
+    }
 
+    updateIngreident(index: number, changedIngreident: Ingreident){   
+        this.ingreidents[index] = changedIngreident;
+        this.IngreidentChanged.next(this.ingreidents.slice());
+    }
 
+    deleteIngrident(index: number){
+        console.log(index)
+        this.ingreidents.splice(index, 1)
+        this.IngreidentChanged.next(this.ingreidents.slice())
     }
 
 
