@@ -17,6 +17,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     editItemIndex: number;
     editedItem: Ingreident;
 
+    // An example of a template driven form approach.
+
   constructor(private slService: ShoppingListService) { }
 
 
