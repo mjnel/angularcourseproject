@@ -34,14 +34,6 @@ addIngreidentsToShoppingList(Ingreidents: Ingreident[]){
 }
 
 
-
-
-
-
-
-
-
-
 getRecipefromArr(index){
   return this.recipes[index]
 }
