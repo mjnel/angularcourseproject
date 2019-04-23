@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 
 @Component({
@@ -22,36 +22,53 @@ recipeForm:FormGroup;
         this.editMode = params['id'] 
         console.log(`edit mode: ${this.editMode}`)
         console.log(`params: ${params['id']}`)
-
-        
+        this.initForm();
     })
 
+  }
 
-    private InitForm(){
+     private initForm(){
       let receipeName = '';
       let imageURL ='';
       let receipeDescription='';
+      let recipeIngreidents = new FormArray([])
 
       if(this.editMode){
         const recipe = this.receipeService.getRecipefromArr(this.id);
         receipeName = recipe.name;
         imageURL = recipe.imagePath
         receipeDescription = recipe.description;
+       
+        
+        if(recipe['Ingreidents']){           
+          recipe.Ingreidents.forEach((element)=>{
+            recipeIngreidents.push(
+              new FormGroup ({
+                name: new FormControl(element.name),
+                amount: new FormControl(element.amount)
+              })
+            )
+          })
+      
+        }
       }
       this.recipeForm = new FormGroup({
         'name': new FormControl(receipeName),
         'imagePath' : new FormControl(imageURL),
-        'description': new FormControl(receipeDescription)
-      })
+        'description': new FormControl(receipeDescription),
+        'ingredients' : new FormControl(recipeIngreidents)
+      }) 
 
     }
 
+    onSubmit(){
+      console.log(this.recipeForm)
+    }
+
+    getControls() {
+      return (<FormArray>this.recipeForm.get('ingredients')).controls;
+    }
+
+
+
   }
-
-
-
-
-
-}
-
-
