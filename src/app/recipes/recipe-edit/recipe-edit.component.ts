@@ -47,8 +47,6 @@ recipeForm:FormGroup;
                 amount: new FormControl(element.amount)
               })
             )
-            console.log(element)
-
           })
       
         }
@@ -75,6 +73,12 @@ recipeForm:FormGroup;
 
     getControls() {
       return (<FormArray>this.recipeForm.get('ingredients')).controls;
+    }
+
+    onAddIngriedent(){
+      let arr = <FormArray>this.recipeForm.get('ingreidents')
+      console.log(arr);
+
     }
 
 
