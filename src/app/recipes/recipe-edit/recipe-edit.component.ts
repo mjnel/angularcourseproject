@@ -38,7 +38,6 @@ recipeForm:FormGroup;
         receipeName = recipe.name;
         imageURL = recipe.imagePath
         receipeDescription = recipe.description;
-       
         
         if(recipe['Ingreidents']){           
           recipe.Ingreidents.forEach((element)=>{
@@ -48,15 +47,21 @@ recipeForm:FormGroup;
                 amount: new FormControl(element.amount)
               })
             )
+            console.log(element)
+
           })
       
         }
       }
+      
+
+
       this.recipeForm = new FormGroup({
         'name': new FormControl(receipeName),
         'imagePath' : new FormControl(imageURL),
         'description': new FormControl(receipeDescription),
-        'ingredients' : new FormControl(recipeIngreidents)
+        'ingredients' : recipeIngreidents
+        
       }) 
 
     }
@@ -64,6 +69,9 @@ recipeForm:FormGroup;
     onSubmit(){
       console.log(this.recipeForm)
     }
+
+    // controller = this.getControls()
+   
 
     getControls() {
       return (<FormArray>this.recipeForm.get('ingredients')).controls;
