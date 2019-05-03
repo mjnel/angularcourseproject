@@ -44,7 +44,7 @@ recipeForm:FormGroup;
             recipeIngreidents.push(
               new FormGroup ({
                 name: new FormControl(element.name),
-                amount: new FormControl(element.amount)
+                amount: new  FormControl(element.amount)
               })
             )
           })
@@ -78,8 +78,6 @@ recipeForm:FormGroup;
 
 
     onAddIngredient() {
-
-      
       (<FormArray>this.recipeForm.get('ingredients')).push(
         new FormGroup({
           'name': new FormControl(null, Validators.required),
