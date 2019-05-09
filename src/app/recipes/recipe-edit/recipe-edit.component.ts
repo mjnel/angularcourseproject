@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
+import {Recipe} from './../recipe.model';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -12,8 +13,10 @@ export class RecipeEditComponent implements OnInit {
 id: number; 
 editMode: boolean;
 recipeForm:FormGroup;
+recipeModel: Recipe;
 
   constructor(private route: ActivatedRoute, private receipeService: RecipeService ) { }
+
 
   ngOnInit() {
     this.route.params.subscribe((params:Params)=>{
@@ -43,8 +46,11 @@ recipeForm:FormGroup;
           recipe.Ingreidents.forEach((element)=>{
             recipeIngreidents.push(
               new FormGroup ({
-                name: new FormControl(element.name),
-                amount: new  FormControl(element.amount)
+                name: new FormControl(element.name, Validators.required),
+                amount: new  FormControl(element.amount, [
+                  Validators.required,
+                  Validators.pattern(/^[1-9]+[0-9]*$/)
+                ])
               })
             )
           })
@@ -53,19 +59,57 @@ recipeForm:FormGroup;
       }
       
 
-
       this.recipeForm = new FormGroup({
-        'name': new FormControl(receipeName),
-        'imagePath' : new FormControl(imageURL),
-        'description': new FormControl(receipeDescription),
+        'name': new FormControl(receipeName, Validators.required),
+        'imagePath' : new FormControl(imageURL,Validators.required),
+        'description': new FormControl(receipeDescription,Validators.required),
         'ingredients' : recipeIngreidents
         
-      }) 
+      })
+
+      // this.recipeModel = new Recipe(receipeName,receipeDescription,imageURL,recipeIngreidents)
+      
+      
+
 
     }
 
     onSubmit(){
       console.log(this.recipeForm)
+      
+
+      // if(this.editMode){
+      //   console.log(this.recipeForm.get('ingreident').value)
+
+      //   this.recipeModel = {
+      //       'name' : this.recipeForm.get('name').value,
+      //       'description': this.recipeForm.get('description').value,
+      //       'imagePath':this.recipeForm.get('imagePath').value,
+      //       'Ingreidents': this.recipeForm.get('ingreidents').value
+      //   }
+        
+
+      //   // this.receipeService.replaceRecipe(this.id, recipeModel)
+
+
+
+
+        
+      //   // this.receipeService.replaceRecipe(this.id, this.recipeForm)
+
+      //   // if true, override the array element from the recipe service
+      // }
+
+      // this.editMode ? console.log(`edit mode is true`) : console.log(`edit mode is false`)
+
+      console.log('test')
+      
+      // map each form element into a local variable
+
+
+
+
+
     }
 
     // controller = this.getControls()

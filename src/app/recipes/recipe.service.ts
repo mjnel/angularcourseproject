@@ -38,4 +38,11 @@ getRecipefromArr(index){
   return this.recipes[index]
 }
 
+
+// ***************************
+replaceRecipe(index:number, element:Recipe){
+  this.recipes[index] = element;
+
+}
+
 }
