@@ -3,11 +3,14 @@ import {Ingreident} from './../shared/ingredient.model';
 
 import {Recipe} from './recipe.model'
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Subject } from 'rxjs';
 
 
 @Injectable()
 
 export class RecipeService{
+
+  recipesChanged = new Subject <Recipe[]>()
   
 
   constructor(private ShoppingListService: ShoppingListService){}
@@ -40,8 +43,19 @@ getRecipefromArr(index){
 
 
 // ***************************
-replaceRecipe(index:number, element:Recipe){
-  this.recipes[index] = element;
+
+addRecipe(recipe: Recipe){
+  this.recipes.push(recipe);
+  this.recipesChanged.next(this.recipes.slice())
+  console.log(`coming from the add ${this.recipes.slice()}`)
+
+}
+
+updateRecipe(index:number, newRecipe:Recipe){
+  this.recipes[index] = newRecipe;
+  this.recipesChanged.next(this.recipes.slice())
+  console.log(`coming from the update`)
+  console.log(this.recipes)
 
 }
 

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import {RecipeService} from '../recipe.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-recipe-list',
@@ -9,10 +10,11 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./recipe-list.component.css']
 })
 
-export class RecipeListComponent implements OnInit {
+export class RecipeListComponent implements OnInit, OnChanges{
 
   //Telling the TS code here that the recipes variable is going to contain an array of the recipe class, so it will be an array of objects.
   recipes:Recipe[]
+  subscription: Subscription;
 
 
 
@@ -30,8 +32,23 @@ export class RecipeListComponent implements OnInit {
     // pass the input 
 
   ngOnInit() {
-    this.recipes = this.recipeService.getRecipes();
+
+    this.subscription = this.recipeService.recipesChanged.subscribe((recipes: Recipe[])=>{
+      console.log("got here!")
+      this.recipes = recipes;
+      console.log(this.recipes);
+    })
+
+    this.recipes = this.recipeService.getRecipes()
+
+
 
   }
+
+ngOnChanges(){
+  // console.lo0g 
+}
+
+
 
 }

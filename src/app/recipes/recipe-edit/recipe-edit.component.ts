@@ -75,36 +75,14 @@ recipeModel: Recipe;
     }
 
     onSubmit(){
-      console.log(this.recipeForm)
-      
+      console.log(`submitted!`)
 
-      // if(this.editMode){
-      //   console.log(this.recipeForm.get('ingreident').value)
+      if(this.editMode){
+        this.receipeService.updateRecipe(this.id,this.recipeForm.value)
+      }else{
+        this.receipeService.addRecipe(this.recipeForm.value)
+      }
 
-      //   this.recipeModel = {
-      //       'name' : this.recipeForm.get('name').value,
-      //       'description': this.recipeForm.get('description').value,
-      //       'imagePath':this.recipeForm.get('imagePath').value,
-      //       'Ingreidents': this.recipeForm.get('ingreidents').value
-      //   }
-        
-
-      //   // this.receipeService.replaceRecipe(this.id, recipeModel)
-
-
-
-
-        
-      //   // this.receipeService.replaceRecipe(this.id, this.recipeForm)
-
-      //   // if true, override the array element from the recipe service
-      // }
-
-      // this.editMode ? console.log(`edit mode is true`) : console.log(`edit mode is false`)
-
-      console.log('test')
-      
-      // map each form element into a local variable
 
 
 
@@ -112,7 +90,6 @@ recipeModel: Recipe;
 
     }
 
-    // controller = this.getControls()
    
 
     getControls() {
