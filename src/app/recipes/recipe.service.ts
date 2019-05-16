@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 
 export class RecipeService{
 
-  recipesChanged = new Subject <Recipe[]>()
+  recipesChanged = new Subject <Recipe[]>();
   
 
   constructor(private ShoppingListService: ShoppingListService){}
@@ -42,7 +42,7 @@ getRecipefromArr(index){
 }
 
 
-// ***************************
+// ***************************  
 
 addRecipe(recipe: Recipe){
   this.recipes.push(recipe);
@@ -52,10 +52,12 @@ addRecipe(recipe: Recipe){
 }
 
 updateRecipe(index:number, newRecipe:Recipe){
+   console.log("updated recipe coming from the update:")
+   console.log(newRecipe)
   this.recipes[index] = newRecipe;
   this.recipesChanged.next(this.recipes.slice())
-  console.log(`coming from the update`)
-  console.log(this.recipes)
+  // debugger;
+
 
 }
 

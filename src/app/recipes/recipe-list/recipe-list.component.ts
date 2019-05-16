@@ -10,11 +10,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./recipe-list.component.css']
 })
 
-export class RecipeListComponent implements OnInit, OnChanges{
+export class RecipeListComponent implements OnInit{
 
   //Telling the TS code here that the recipes variable is going to contain an array of the recipe class, so it will be an array of objects.
   recipes:Recipe[]
-  subscription: Subscription;
 
 
 
@@ -31,23 +30,38 @@ export class RecipeListComponent implements OnInit, OnChanges{
  
     // pass the input 
 
+  // ngOnInit() {
+
+  //   this.recipeService.recipesChanged.subscribe((recipes: Recipe[])=>{
+  //     console.log("got here!")
+  //     this.recipes = recipes;
+  //     console.log(this.recipes);
+  //   })
+
+  //   this.recipes = this.recipeService.getRecipes()
+
+
+
+  // }
+
+
   ngOnInit() {
+    this.recipeService.recipesChanged
+      .subscribe(
+        (recipes: Recipe[]) => {
+          this.recipes = recipes;
+          console.log(`coming from the list compoent`)
+          console.log(this.recipes)
+        }
+      );
+    this.recipes = this.recipeService.getRecipes();
+  console.log(`coming from the list component`)
+  console.log(this.recipes)
 
-    this.subscription = this.recipeService.recipesChanged.subscribe((recipes: Recipe[])=>{
-      console.log("got here!")
-      this.recipes = recipes;
-      console.log(this.recipes);
-    })
 
-    this.recipes = this.recipeService.getRecipes()
-
-
-
-  }
-
-ngOnChanges(){
-  // console.lo0g 
 }
+
+
 
 
 
