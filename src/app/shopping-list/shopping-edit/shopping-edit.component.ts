@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Ingreident } from 'src/app/shared/ingredient.model';
+import { Ingredient } from 'src/app/shared/ingredient.model';
 import {ShoppingListService} from './../shopping-list.service';
 import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     editMode: boolean = false; 
     editItemIndex: number;
-    editedItem: Ingreident;
+    editedItem: Ingredient;
 
     // An example of a template driven form approach.
 
@@ -41,7 +41,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm){
     const value = form.value;
-    const newIngredient = new Ingreident(value.name, value.amount)
+    const newIngredient = new Ingredient(value.name, value.amount)
     if(this.editMode){
       this.slService.updateIngreident(this.editItemIndex, newIngredient)
     }else{

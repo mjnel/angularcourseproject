@@ -1,19 +1,19 @@
-import {Ingreident} from './../shared/ingredient.model';
+import {Ingredient} from './../shared/ingredient.model';
 import { Subject } from 'rxjs';
 
 
 export class ShoppingListService{
     // mamnaghe list of ingedietns + add ingreditent method currently in shopping list c
-    IngreidentChanged = new Subject <Ingreident[]>()
+    IngreidentChanged = new Subject <Ingredient[]>()
     startedEditing = new Subject <number>()
     
-   private ingreidents: Ingreident[] = [
-        new Ingreident('Apples', 5),
-        new Ingreident('Tomatoes', 10)
+   private ingreidents: Ingredient[] = [
+        new Ingredient('Apples', 5),
+        new Ingredient('Tomatoes', 10)
       ];
     
 
-    addingreident (incomingIngreident :Ingreident){
+    addingreident (incomingIngreident :Ingredient){
         this.ingreidents.push(incomingIngreident);
         this.IngreidentChanged.next(this.ingreidents.slice())
     }
@@ -27,12 +27,12 @@ export class ShoppingListService{
         return this.ingreidents[index];
     }
 
-    addIngreidents(Ingreidents: Ingreident[]){
+    addIngreidents(Ingreidents: Ingredient[]){
         this.ingreidents.push(...Ingreidents);
         this.IngreidentChanged.next(this.ingreidents.slice());
     }
 
-    updateIngreident(index: number, changedIngreident: Ingreident){   
+    updateIngreident(index: number, changedIngreident: Ingredient){   
         this.ingreidents[index] = changedIngreident;
         this.IngreidentChanged.next(this.ingreidents.slice());
     }

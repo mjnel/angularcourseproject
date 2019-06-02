@@ -24,7 +24,6 @@ export class RecipeItemComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log( `the index of the recipe is ${this.index}`)
     // console.log(this.inputRecipe.id)
 
   }

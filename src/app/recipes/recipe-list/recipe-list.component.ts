@@ -50,13 +50,9 @@ export class RecipeListComponent implements OnInit{
       .subscribe(
         (recipes: Recipe[]) => {
           this.recipes = recipes;
-          console.log(`coming from the list compoent`)
-          console.log(this.recipes)
         }
       );
     this.recipes = this.recipeService.getRecipes();
-  console.log(`coming from the list component`)
-  console.log(this.recipes)
 
 
 }

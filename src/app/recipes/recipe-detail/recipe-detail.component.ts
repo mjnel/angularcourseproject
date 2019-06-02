@@ -27,26 +27,25 @@ export class RecipeDetailComponent implements OnInit, OnChanges {
     }
 
   toShoppingList(input){
-    this.recipeService.addIngreidentsToShoppingList(this.incomingRecipe.Ingreidents)
+    this.recipeService.addIngreidentsToShoppingList(this.incomingRecipe.Ingredients)
 
   }  
 
   ngOnInit() {
-
     this.route.params.subscribe((params:Params)=>{
-      this.queryParam = params['id'];
-      // console.log(`inside the observable data.id: ${params['id']}`);
-      
+      this.queryParam = params['id'];     
       this.incomingRecipe = this.recipeService.getRecipefromArr(this.queryParam)
+      console.log(`coming from detail C`)
+      console.log(this.incomingRecipe); 
 
     })
 
-
-
-
   }
 
+
+
   ngOnChanges(){
+
 
   }
 

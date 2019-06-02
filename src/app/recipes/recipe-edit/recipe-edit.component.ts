@@ -15,7 +15,7 @@ editMode: boolean;
 recipeForm:FormGroup;
 recipeModel: Recipe;
 
-  constructor(private route: ActivatedRoute, private receipeService: RecipeService ) { }
+  constructor(private route: ActivatedRoute, private recipeService: RecipeService ) { }
 
 
   ngOnInit() {
@@ -23,12 +23,12 @@ recipeModel: Recipe;
         this.id = parseInt(params['id']);
         // if params is not undefined then its truthy so this.edit mode = true. 
         this.editMode = params['id'] 
-        console.log(`edit mode: ${this.editMode}`)
-        console.log(`params: ${params['id']}`)
         this.initForm();
     })
 
   }
+
+
 
      private initForm(){
       let receipeName = '';
@@ -37,13 +37,13 @@ recipeModel: Recipe;
       let recipeIngreidents = new FormArray([])
 
       if(this.editMode){
-        const recipe = this.receipeService.getRecipefromArr(this.id);
+        const recipe = this.recipeService.getRecipefromArr(this.id);
         receipeName = recipe.name;
         imageURL = recipe.imagePath
         receipeDescription = recipe.description;
         
-        if(recipe['Ingreidents']){           
-          recipe.Ingreidents.forEach((element)=>{
+        if(recipe['Ingredients']){           
+          recipe.Ingredients.forEach((element)=>{
             recipeIngreidents.push(
               new FormGroup ({
                 name: new FormControl(element.name, Validators.required),
@@ -63,13 +63,14 @@ recipeModel: Recipe;
         'name': new FormControl(receipeName, Validators.required),
         'imagePath' : new FormControl(imageURL,Validators.required),
         'description': new FormControl(receipeDescription,Validators.required),
-        'ingredients' : recipeIngreidents
+        'Ingredients' : recipeIngreidents
         
       })
 
-      // this.recipeModel = new Recipe(receipeName,receipeDescription,imageURL,recipeIngreidents)
+
       
       
+
 
 
     }
@@ -78,9 +79,12 @@ recipeModel: Recipe;
       console.log(`submitted!`)
 
       if(this.editMode){
-        this.receipeService.updateRecipe(this.id,this.recipeForm.value)
+        this.recipeService.updateRecipe(this.id,this.recipeForm.value)
+        console.log(this.recipeForm.value)
       }else{
-        this.receipeService.addRecipe(this.recipeForm.value)
+        this.recipeService.addRecipe(this.recipeForm.value)
+        console.log(this.recipeForm.value)
+
       }
 
 
@@ -93,13 +97,13 @@ recipeModel: Recipe;
    
 
     getControls() {
-      return (<FormArray>this.recipeForm.get('ingredients')).controls;
+      return (<FormArray>this.recipeForm.get('Ingredients')).controls;
     }
 
 
 
     onAddIngredient() {
-      (<FormArray>this.recipeForm.get('ingredients')).push(
+      (<FormArray>this.recipeForm.get('Ingredients')).push(
         new FormGroup({
           'name': new FormControl(null, Validators.required),
           'amount': new FormControl(null, [

@@ -1,17 +1,19 @@
-import { Ingreident } from "../shared/ingredient.model";
+import { Ingredient } from "../shared/ingredient.model";
 
 export class Recipe {
     public name: string;
     public description: string;
     public imagePath: string;
-    public Ingreidents: Ingreident[];
+    public Ingredients: Ingredient[];
+
+    
 
         //Constructor is a built in function every class class has and will be executed once you create a new instance of the class
-    constructor( name: string, desc: string, imagePath: string, ingredients: Ingreident[]) {
+    constructor( name: string, desc: string, imagePath: string, ingredients: Ingredient[]) {
         
         this.name = name;
         this.description = desc;
         this.imagePath = imagePath;
-        this.Ingreidents = ingredients;
+        this.Ingredients = ingredients;
     }
 }
