@@ -1,8 +1,8 @@
-import { Component, OnInit,  OnChanges } from '@angular/core';
+import { Component, OnInit,  OnChanges, DoCheck } from '@angular/core';
 import {RecipeService} from './../recipe.service'
 
 import {Recipe} from './../recipe.model';
-import { ActivatedRoute, Data, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
  
 
 @Component({
@@ -10,7 +10,8 @@ import { ActivatedRoute, Data, Params, Router } from '@angular/router';
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.css']
 })
-export class RecipeDetailComponent implements OnInit, OnChanges {
+
+export class RecipeDetailComponent implements OnInit {
 
   incomingRecipe:Recipe
   queryParam: number; 
@@ -26,6 +27,14 @@ export class RecipeDetailComponent implements OnInit, OnChanges {
       // this.router.navigate(['../', this.queryParam, 'edit'], {relativeTo : this.route })
     }
 
+
+    onDelete(){
+      this.recipeService.deleteRecipe(this.queryParam);
+      console.log(this.recipeService.getRecipes())
+      this.router.navigate(['../'])
+
+    }
+
   toShoppingList(input){
     this.recipeService.addIngreidentsToShoppingList(this.incomingRecipe.Ingredients)
 
@@ -35,18 +44,11 @@ export class RecipeDetailComponent implements OnInit, OnChanges {
     this.route.params.subscribe((params:Params)=>{
       this.queryParam = params['id'];     
       this.incomingRecipe = this.recipeService.getRecipefromArr(this.queryParam)
-      console.log(`coming from detail C`)
-      console.log(this.incomingRecipe); 
-
     })
 
-  }
-
-
-
-  ngOnChanges(){
-
 
   }
+
+
 
 }
