@@ -87,8 +87,7 @@ recipeModel: Recipe;
         console.log(this.recipeForm.value)
 
       }
-
-     this.router.navigate(['../'], {relativeTo:this.route})
+      this.onCancel();
      // this.router.navigate(['../', this.queryParam, 'edit'], {relativeTo : this.route })
 
     }
@@ -112,6 +111,7 @@ recipeModel: Recipe;
         })
       );
     }
+
 
     onCancel(){
       this.router.navigate(['../'], {relativeTo:this.route})
