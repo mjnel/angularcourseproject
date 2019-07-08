@@ -118,5 +118,10 @@ recipeModel: Recipe;
     }
 
 
+    onDeleteIngredient(index: number){
+      (<FormArray>this.recipeForm.get('Ingredients')).removeAt(index)
+    }
+
+
 
   }
