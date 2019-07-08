@@ -47,6 +47,7 @@ export class RecipeListComponent implements OnInit, OnDestroy{
 
 
   ngOnInit() {
+    console.log(this.recipeService.getRecipes())
     this.subscription = this.recipeService.recipesChanged
       .subscribe(
         (recipes: Recipe[]) => {
@@ -60,7 +61,7 @@ export class RecipeListComponent implements OnInit, OnDestroy{
 
 
 ngOnDestroy(){
-  this.recipeService.recipesChanged.unsubscribe()
+  this.subscription.unsubscribe()
 }
 
 

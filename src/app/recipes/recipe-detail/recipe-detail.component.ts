@@ -1,8 +1,10 @@
-import { Component, OnInit,  OnChanges, DoCheck } from '@angular/core';
+import { Component, OnInit,  OnChanges, DoCheck, OnDestroy } from '@angular/core';
 import {RecipeService} from './../recipe.service'
 
 import {Recipe} from './../recipe.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
  
 
 @Component({
@@ -15,6 +17,8 @@ export class RecipeDetailComponent implements OnInit {
 
   incomingRecipe:Recipe
   queryParam: number; 
+  subscription: Subscription
+
 
   constructor(private recipeService:RecipeService, 
               private route : ActivatedRoute,
@@ -40,13 +44,16 @@ export class RecipeDetailComponent implements OnInit {
   }  
 
   ngOnInit() {
-    this.route.params.subscribe((params:Params)=>{
+
+    
+   this.route.params.subscribe((params:Params)=>{
       this.queryParam = params['id'];     
       this.incomingRecipe = this.recipeService.getRecipefromArr(this.queryParam)
     })
 
 
   }
+
 
 
 
