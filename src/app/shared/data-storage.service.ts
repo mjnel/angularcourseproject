@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipe.model';
-import {map} from 'rxjs/operators'
+import {map, tap} from 'rxjs/operators'
 
 
 @Injectable({providedIn: 'root'})
@@ -23,17 +23,17 @@ this.http.put('https://ng-course-project-ab6df.firebaseio.com/recipes.json', rec
 
 
 fetchRecipes(){
-    this.http.get<Recipe[]>('https://ng-course-project-ab6df.firebaseio.com/recipes.json')
+    return this.http.get<Recipe[]>('https://ng-course-project-ab6df.firebaseio.com/recipes.json')
     // Ensuring that the array is either defined or is empty
     .pipe(map(recipes=>{
         return recipes.map(recipe =>{
             return {...recipe, Ingredients:recipe.Ingredients ? recipe.Ingredients : []}            
         });
-    }))
-    .subscribe(recipes =>{
-    this.recipesService.setRecipes(recipes)
-    })
+    }), tap(recipes =>{ 
+        this.recipesService.setRecipes(recipes)
 
+    })
+    )
 
 }
 
