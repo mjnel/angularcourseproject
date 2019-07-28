@@ -15,6 +15,7 @@ export class RecipeService{
 
   constructor(private ShoppingListService: ShoppingListService){}
 
+  // private recipes: Recipe [];
 
   private recipes:Recipe[] =[
         new Recipe( 'Spaghetti Bolognese', 'The best Bolognese there is',
