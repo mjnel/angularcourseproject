@@ -10,6 +10,7 @@ export class AppComponent {
   recipeStatus: boolean = true;
   shoppingStatus: boolean = false;
 
+  
   incomingRecipe(recipeResult){
     this.recipeStatus = recipeResult;
     console.log(`recipe is: ${recipeResult}`);
