@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
-import { AuthService } from "./auth.service";
+import { AuthService, AuthResponseData } from "./auth.service";
+import { Observable } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-auth',
@@ -11,9 +13,11 @@ import { AuthService } from "./auth.service";
 
 export class AuthComponent implements OnInit{
 isLogInMode:boolean = true; 
+isLoading: boolean = false; 
 signupForm: FormGroup; 
+error: string = null; 
 
-constructor(private authService: AuthService){}
+constructor(private authService: AuthService, private router: Router){}
 
 
 
@@ -36,19 +40,28 @@ onSubmit(){
     return 
   }
 
-
   const email = this.signupForm.value.email;
   const password = this.signupForm.value.password;
- 
+  this.isLoading = true;
+  let authObs: Observable<AuthResponseData>
+
+
   if(this.isLogInMode){
-    console.log("got here")
+    authObs = this.authService.login(email, password);
   }else{
-    this.authService.signup(email,password).subscribe((res)=>{
-      console.log(res);
-    },(error)=>{
-      console.log(error)
-    })
+    authObs = this.authService.signup(email, password)
   }
+
+  authObs.subscribe(resData =>{
+    console.log(resData)
+    this.isLoading = false
+  },errorMessage=>{
+    console.log(errorMessage)
+    this.error = errorMessage;
+    this.isLoading = false;
+  })
+
+
 
   this.signupForm.reset();
   
