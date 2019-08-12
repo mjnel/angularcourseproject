@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError,tap } from "rxjs/operators";
-import { throwError, Subject } from "rxjs";
+import { throwError, Subject,BehaviorSubject } from "rxjs";
 import { User } from "./user.model";
 
 // useful to define an interface to decribe the response of the data 
@@ -22,7 +22,13 @@ export interface AuthResponseData {
 })
 
 export class AuthService {
-    user = new Subject<User>();
+// subscrive and get new informatoion when emitted
+// behaviour subject - gives subscribers previous subscription details, so can subscribe and get data even after the user has been updated.
+    user = new BehaviorSubject<User>(null);
+
+
+
+
 
 constructor(private http: HttpClient){}
 
@@ -54,6 +60,11 @@ login(email:string, password:string){
     }
 
 
+logout(){
+    this.user.next(null);
+}
+
+
  private handleAuth(email: string, localId: string, idToken: string, expiresIn: number){
         const expirationDate  = new Date(new Date().getTime()+ expiresIn * 1000)
         // getting the UNIX epoch time and adding on the amount of milli seconds which the server allows and converting back to a date object
@@ -66,7 +77,7 @@ login(email:string, password:string){
 
 
 private handleError(errorRes: HttpErrorResponse){
-    console.log(errorRes);
+    // console.log(errorRes);
     let errorMessage = 'An unknown error message occured!'
     if(!errorRes.error || !errorRes.error.error){
         return throwError(errorMessage);

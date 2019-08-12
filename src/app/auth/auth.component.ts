@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
 import { AuthService, AuthResponseData } from "./auth.service";
 import { Observable } from "rxjs";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: 'app-auth',
@@ -17,7 +17,9 @@ isLoading: boolean = false;
 signupForm: FormGroup; 
 error: string = null; 
 
-constructor(private authService: AuthService, private router: Router){}
+constructor(private authService: AuthService, 
+            private router: Router,
+            private route: ActivatedRoute){}
 
 
 
@@ -25,7 +27,7 @@ onSwitchMode(){
   this.isLogInMode = !this.isLogInMode
 }
 
-
+// reactiveform approach
 ngOnInit(){
   this.signupForm = new FormGroup({
     'email': new FormControl(null, [Validators.required, Validators.email]),
@@ -55,6 +57,7 @@ onSubmit(){
   authObs.subscribe(resData =>{
     console.log(resData)
     this.isLoading = false
+    this.router.navigate(['/recipes'])
   },errorMessage=>{
     console.log(errorMessage)
     this.error = errorMessage;
