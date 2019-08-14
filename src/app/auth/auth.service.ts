@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError,tap } from "rxjs/operators";
 import { throwError, Subject,BehaviorSubject } from "rxjs";
 import { User } from "./user.model";
+import { Router } from "@angular/router";
 
 // useful to define an interface to decribe the response of the data 
 
@@ -30,7 +31,7 @@ export class AuthService {
 
 
 
-constructor(private http: HttpClient){}
+constructor(private http: HttpClient, private router: Router ){}
 
 
  signup(email:string, password:string){
@@ -44,6 +45,33 @@ constructor(private http: HttpClient){}
             this.handleAuth(resData.email, resData.localId, resData.idToken, +resData.expiresIn)
         }))
     }
+
+
+
+autoLogin(){
+    const userData: {
+            email: string, 
+            id : string, 
+            _token:string, 
+            _tokenExpire:string
+       } = JSON.parse(localStorage.getItem('userData')) 
+       // convert to JS object  
+ 
+    if(!userData){
+        return
+    }
+    // going to the local storage to check if there is a user, if there isn't function returns.
+    const loadedUser = new User(userData.email,userData.id, userData._token, new Date(userData._tokenExpire)); 
+    // making a new user 
+
+    if(loadedUser.token){
+        this.user.next(loadedUser)
+    }
+    // checking if the user is valid
+
+}
+
+
 
 
 
@@ -62,6 +90,8 @@ login(email:string, password:string){
 
 logout(){
     this.user.next(null);
+    this.router.navigate(['/auth'])
+
 }
 
 
@@ -71,6 +101,7 @@ logout(){
         console.log(`expiration date is:` + expirationDate);
         const user = new User(email, localId, idToken, expirationDate);
         this.user.next(user);
+        localStorage.setItem('userData',JSON.stringify(user));
 }
 
 

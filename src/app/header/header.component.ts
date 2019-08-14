@@ -36,7 +36,19 @@ onSaveData(){
   }
 
 
+  onLogout(){
+    console.log(`logout clicked`)
+    this.authService.logout();
+  }
+
+
 
 
 
 }
+
+
+
+
+
+
