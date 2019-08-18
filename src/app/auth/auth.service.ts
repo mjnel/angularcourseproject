@@ -26,7 +26,7 @@ export class AuthService {
 // subscrive and get new informatoion when emitted
 // behaviour subject - gives subscribers previous subscription details, so can subscribe and get data even after the user has been updated.
     user = new BehaviorSubject<User>(null);
-
+    private tokenExpirationTimer: any;
 
 
 
@@ -46,9 +46,41 @@ constructor(private http: HttpClient, private router: Router ){}
         }))
     }
 
+    
+//     isAuthenticated(){
+//         console.log(`Hitting the isAuth method`)
+//     const promise = new Promise((resolve, reject)=>{
+//         this.user.subscribe((userObj)=>{
+//     if(userObj){
+//         // do I need to explicty declare true here or will resolving work?
+//         resolve(true)
+//         }
+//         console.log('no user')
+//         reject
+//         })
+//     }) 
+//     return promise
+// }
+
+
+
+isAuthenticated(){
+    this.user.subscribe((userObj)=>{
+        if (userObj){
+            return true;
+        }else {
+            return false;
+        }
+    })
+}
+
+
+
+
 
 
 autoLogin(){
+    // being ran in the iniatalied app service.
     const userData: {
             email: string, 
             id : string, 
@@ -66,10 +98,21 @@ autoLogin(){
 
     if(loadedUser.token){
         this.user.next(loadedUser)
+        // future time - current time = remaining time
+        const remainingTime = new Date(userData._tokenExpire).getTime() - new Date().getTime()
+        this.autoLogOut(remainingTime);
     }
     // checking if the user is valid
 
 }
+
+
+autoLogOut(expiration: number){
+    console.log(expiration);
+    this.tokenExpirationTimer = setTimeout(()=>{
+        this.logout();
+        },expiration)
+    }
 
 
 
@@ -83,6 +126,7 @@ login(email:string, password:string){
         returnSecureToken: true
     }).pipe(catchError(this.handleError),tap(resData =>{
         this.handleAuth(resData.email, resData.localId, resData.idToken, +resData.expiresIn)
+        // console.log(+resData.expiresIn)
     }))
 
     }
@@ -91,7 +135,12 @@ login(email:string, password:string){
 logout(){
     this.user.next(null);
     this.router.navigate(['/auth'])
-
+    localStorage.removeItem('userData')
+    // looking for a valid token, if it finds one, it then clears the timeout. 
+    if(this.tokenExpirationTimer){
+        clearTimeout(this.tokenExpirationTimer)
+        this.tokenExpirationTimer = null;
+    }
 }
 
 
@@ -102,6 +151,10 @@ logout(){
         const user = new User(email, localId, idToken, expirationDate);
         this.user.next(user);
         localStorage.setItem('userData',JSON.stringify(user));
+        this.autoLogOut(expiresIn*1000);
+        this.isAuthenticated()
+
+        // console.log(new Date().getTime())
 }
 
 
