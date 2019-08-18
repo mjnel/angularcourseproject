@@ -47,22 +47,6 @@ constructor(private http: HttpClient, private router: Router ){}
     }
 
     
-//     isAuthenticated(){
-//         console.log(`Hitting the isAuth method`)
-//     const promise = new Promise((resolve, reject)=>{
-//         this.user.subscribe((userObj)=>{
-//     if(userObj){
-//         // do I need to explicty declare true here or will resolving work?
-//         resolve(true)
-//         }
-//         console.log('no user')
-//         reject
-//         })
-//     }) 
-//     return promise
-// }
-
-
 
 isAuthenticated(){
     this.user.subscribe((userObj)=>{
