@@ -70,6 +70,10 @@ onSubmit(){
   
 }
 
+handleError(){
+  this.error = null; 
+}
+
 
 
 
