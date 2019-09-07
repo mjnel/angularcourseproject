@@ -11,10 +11,10 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
  export class AlertComponent{
 
     @Input() message: string; 
-    @Output() close = new EventEmitter<void>();  
+    @Output() close = new EventEmitter<String>();  
 
     onClose(){
-        this.close.emit()
+        this.close.emit('ALERT!')
     }
 
 

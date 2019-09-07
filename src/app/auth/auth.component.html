@@ -7,10 +7,12 @@
         </p>
     </div> -->
      
-<app-alert [message]="error" *ngIf="error" (close)="handleError()"></app-alert>
+<!-- <app-alert [message]="error" *ngIf="error" (close)="handleError($output)"></app-alert> -->
+    <ng-template appPlaceholder ></ng-template>
+    <!-- Not render anything to the DOM but still accessible from the template  -->
 
     <div *ngIf="isLoading" style="text-align: center">
-        <app-loading-spinner></app-loading-spinner>
+        <app-loading-spinner ></app-loading-spinner>
     </div>
     <form *ngIf="!isLoading">
         <div class="form-group" [formGroup]="signupForm">

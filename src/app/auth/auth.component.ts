@@ -1,8 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,ComponentFactoryResolver, ViewChild } from "@angular/core";
 import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
 import { AuthService, AuthResponseData } from "./auth.service";
 import { Observable } from "rxjs";
 import { Router, ActivatedRoute } from "@angular/router";
+import { AlertComponent } from "../shared/alert/alert.component";
+import {PlaceholderDirective} from '../shared/placeholder/placeholder.directive'
 
 @Component({
     selector: 'app-auth',
@@ -17,9 +19,13 @@ isLoading: boolean = false;
 signupForm: FormGroup; 
 error: string = null; 
 
+@ViewChild(PlaceholderDirective) alertHost: PlaceholderDirective;
+
 constructor(private authService: AuthService, 
             private router: Router,
-            private route: ActivatedRoute){}
+            private route: ActivatedRoute,
+            private componentFactoryResolver: ComponentFactoryResolver
+            ){}
 
 
 
@@ -61,6 +67,7 @@ onSubmit(){
   },errorMessage=>{
     console.log(errorMessage)
     this.error = errorMessage;
+    this.showErrorAlert(errorMessage)
     this.isLoading = false;
   })
 
@@ -70,8 +77,22 @@ onSubmit(){
   
 }
 
-handleError(){
+handleError(error){
+  console.log('this is the error!')
   this.error = null; 
+}
+
+private showErrorAlert(message: string){
+  // returning just the factory   
+  // object which knows how to create alert components
+ const alertComponentFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
+ 
+ const hostViewContainerRef = this.alertHost.viewContainerRef;
+ hostViewContainerRef.clear();
+ hostViewContainerRef.createComponent(alertComponentFactory);
+
+
+
 }
 
 
