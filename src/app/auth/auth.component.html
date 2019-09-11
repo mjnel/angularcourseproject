@@ -6,6 +6,9 @@
             {{error}}
         </p>
     </div> -->
+
+    <!-- (close) - this is the event comign from the alert component -->
+    <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
      
 <!-- <app-alert [message]="error" *ngIf="error" (close)="handleError($output)"></app-alert> -->
     <ng-template appPlaceholder ></ng-template>

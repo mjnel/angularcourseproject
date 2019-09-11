@@ -67,7 +67,6 @@ onSubmit(){
   },errorMessage=>{
     console.log(errorMessage)
     this.error = errorMessage;
-    this.showErrorAlert(errorMessage)
     this.isLoading = false;
   })
 
@@ -82,18 +81,11 @@ handleError(error){
   this.error = null; 
 }
 
-private showErrorAlert(message: string){
-  // returning just the factory   
-  // object which knows how to create alert components
- const alertComponentFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
- 
- const hostViewContainerRef = this.alertHost.viewContainerRef;
- hostViewContainerRef.clear();
- hostViewContainerRef.createComponent(alertComponentFactory);
-
-
-
+onHandleError(){
+  this.error = null;
 }
+
+
 
 
 
