@@ -5,8 +5,7 @@ import { Directive, HostListener, HostBinding } from '@angular/core';
 })
 export class DropdownDirective {
 @HostBinding ('class.open') isOpen= false; 
-
-  @HostBinding('class.open') condition = false;
+@HostBinding('class.open') condition = false;
 
 
   @HostListener('click') onChange() {

@@ -7,11 +7,10 @@
         </p>
     </div> -->
 
-    <!-- (close) - this is the event comign from the alert component -->
+    <!-- (close) - this is the event coming from the alert component -->
     <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
      
-<!-- <app-alert [message]="error" *ngIf="error" (close)="handleError($output)"></app-alert> -->
-    <ng-template appPlaceholder ></ng-template>
+    <!-- <ng-template appPlaceholder ></ng-template> -->
     <!-- Not render anything to the DOM but still accessible from the template  -->
 
     <div *ngIf="isLoading" style="text-align: center">

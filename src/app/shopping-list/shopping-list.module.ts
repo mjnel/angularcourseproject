@@ -5,8 +5,13 @@ import { FormsModule } from '@angular/forms';
 
 import {ShoppingListComponent} from './shopping-list.component';
 import {ShoppingEditComponent} from './shopping-edit/shopping-edit.component';
-import {ShoppingListRoutingModule} from './shopping-list.routing.module';
+import { Routes, RouterModule } from '@angular/router';
 
+
+
+const routes: Routes = [
+    {path: 'shopping-list', component: ShoppingListComponent}
+]
 
 
 @NgModule({
@@ -17,9 +22,9 @@ import {ShoppingListRoutingModule} from './shopping-list.routing.module';
     imports:[
         CommonModule,
         FormsModule,
-        ShoppingListRoutingModule
-        
-    ]
+        RouterModule.forChild(routes)
+    ],
+    exports: [RouterModule]
 })
 
 
