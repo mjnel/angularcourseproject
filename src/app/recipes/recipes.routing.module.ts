@@ -12,14 +12,14 @@ import {recipesResolverService} from './recipes-resolver.service';
 
 const routes: Routes =[
     { 
-        path: 'recipes', 
+        path: '', 
         canActivate : [AuthGuard],
         component: RecipesComponent, children:[
             {path: '', component: RecipeStartComponent},
             {path: 'new', component:RecipeEditComponent},
             {path: ':id', component: RecipeDetailComponent, resolve: [recipesResolverService]},
             {path: ':id/edit', component:RecipeEditComponent, resolve: [recipesResolverService] }
-        ]},
+        ]}
 
 ]
 
