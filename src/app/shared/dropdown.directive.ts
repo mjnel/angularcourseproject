@@ -4,8 +4,10 @@ import { Directive, HostListener, HostBinding } from '@angular/core';
   selector: '[appDropdown]'
 })
 export class DropdownDirective {
-@HostBinding ('class.open') isOpen= false; 
-@HostBinding('class.open') condition = false;
+  // add class to the element it is clicked on and remove when clicked again 
+  // the class is defined in bootstrap
+
+  @HostBinding('class.open') condition = false;
 
 
   @HostListener('click') onChange() {
