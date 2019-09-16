@@ -1,9 +1,16 @@
 import  {NgModule} from '@angular/core';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Routes, RouterModule} from '@angular/router'
+
 
 import {AuthComponent} from './auth.component'; 
-import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
+
+const routes: Routes =[
+    {path: 'auth', component: AuthComponent}
+]
+
 
 
 @NgModule({
@@ -14,8 +21,8 @@ import { SharedModule } from '../shared/shared.module';
         ReactiveFormsModule,
         CommonModule,
         FormsModule,
-        SharedModule    
-
+        SharedModule,
+        RouterModule.forChild(routes)
     ],
     exports:[AuthComponent]
 })
