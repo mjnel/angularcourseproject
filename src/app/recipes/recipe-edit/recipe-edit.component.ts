@@ -94,7 +94,11 @@ recipeModel: Recipe;
 
    
 
-    getControls() {
+    // getControls() {
+    //   return (<FormArray>this.recipeForm.get('Ingredients')).controls;
+    // }
+
+    get ingreidentControls(){
       return (<FormArray>this.recipeForm.get('Ingredients')).controls;
     }
 
@@ -114,7 +118,7 @@ recipeModel: Recipe;
 
 
     onCancel(){
-      this.router.navigate(['../'], {relativeTo:this.route})
+     this.router.navigate(['../'], {relativeTo:this.route})
     }
 
 

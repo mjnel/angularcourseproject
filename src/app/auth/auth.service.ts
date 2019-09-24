@@ -43,7 +43,7 @@ constructor(private http: HttpClient, private router: Router ){}
             returnSecureToken: true
         }).pipe(catchError(this.handleError), tap(resData =>{
             this.handleAuth(resData.email, resData.localId, resData.idToken, +resData.expiresIn)
-        }))
+            }))
     }
 
     
@@ -139,7 +139,7 @@ logout(){
         this.isAuthenticated()
 
         // console.log(new Date().getTime())
-}
+ }
 
 
 

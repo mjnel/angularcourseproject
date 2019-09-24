@@ -45,24 +45,6 @@ fetchRecipes(){
     )
 }
 
-// fetchRecipes(){
-//     return  this.authService.user.pipe(take(1), exhaustMap(user =>{
-//          return this.http.get<Recipe[]>(
-//          'https://ng-course-project-ab6df.firebaseio.com/recipes.json')
-//      }),tap(recipes =>{ 
-//         console.log(`at the tap: `)
-//         console.log(recipes)
-//         this.recipesService.setRecipes(recipes)
-//     })
-
-//      )
-     
-//  }
-
-
-
-
-
 
     
 }
