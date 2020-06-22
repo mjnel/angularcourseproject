@@ -26,6 +26,7 @@ import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer
     CoreModule, 
     StoreModule.forRoot({shoppingList : shoppingListReducer})
   ],
+
   providers: [LoggingService],
   bootstrap: [AppComponent]
 
